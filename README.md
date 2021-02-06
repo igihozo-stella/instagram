@@ -1,10 +1,10 @@
 # instagramClone
-this application will allow the user to view photos,likes,follow and unfollow even comments.
-this web application works as the same as the instagram website the user able to likes  according to the post, comment any picture they want and the user can have their own profile where they can view only the picture ther have post.
+this application will allow the user to view photos, post photos,likes,follow and unfollow even comments.
+this web application works as the same as the instagram website the user able to like the post, comment any picture he/she want , the user can have his/her own profile and can view only the picture he or she has posted.
 
 ## By Dukunde Marie Jeanne
 ## Description
-Instagram Clone this have dashborad used by admin and by a user,Instagram,Profile and post images , 29 September 2019
+Instagram Clone this have dashboard used by admin and by a user,Instagram,Profile and post images , 29 September 2019
 
 every user can post any picture by creating and account and view all picture posted those you follower 
 
