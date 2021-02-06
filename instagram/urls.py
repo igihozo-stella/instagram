@@ -3,13 +3,13 @@ from instagram.views import PostLikeToggle, PostLikeAPIToggle
 from . import views
 
 urlpatterns = [
-    url('^signup/', views.signup, name='signup'),
+    url('^signup/$', views.signup, name='signup'),
     url('^account/', include('django.contrib.auth.urls')),
     url('^$', views.index, name='index'),
-    url('^profile/<username>/', views.profile, name='profile'),
-    url('^user_profile/<username>/', views.user_profile, name='user_profile'),
-    url('^post/<id>', views.post_comment, name='comment'),
-    url('^post/<id>/like', PostLikeToggle.as_view(), name='liked'),
+    url('^profile/(?P<username>[^/]+)$', views.profile, name='profile'),
+    url('^user_profile/(?P<username>[^/]+)$', views.user_profile, name='user_profile'),
+    url('^post/(?P<id>\d+)/$', views.post_comment, name='comment'),
+    url('^post/(?P<id>\d+)/like', PostLikeToggle.as_view(), name='liked'),
     url('^api/post/<id>/like', PostLikeAPIToggle.as_view(), name='liked-api'),
     url('^like', views.like_post, name='like_post'),
     url('^search/', views.search_profile, name='search'),
