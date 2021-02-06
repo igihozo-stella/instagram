@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import django_heroku
+import dj_database_url
 from decouple import config, Csv
+
 
 
 # Email configurations remember to install python-decouple
@@ -29,16 +32,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4nl3j@5j%yz4&$=2h+==f=wg6ykg7j$&67x=_dk=hjutm(1kpg'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = config('DEBUG', default=False, cast=bool)
+ DEBUG = config('DEBUG', default=False, cast=bool)
 
-# ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
@@ -80,6 +83,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'whitenoise.middleware.WhiteNoiseMiddleware',
             ],
         },
     },
@@ -93,10 +97,10 @@ WSGI_APPLICATION = 'instapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE':'django.db.backends.postgresql_psycopg2',
-        'NAME': 'instagram',
-        'USER':'igihozo',
-        'PASSWORD':'marlyne96',
+        # 'ENGINE':'django.db.backends.postgresql_psycopg2',
+        # # 'NAME': 'instagram',
+        # 'USER':'igihozo',
+        # 'PASSWORD':'marlyne96',
     }
 }
 
@@ -140,10 +144,16 @@ USE_TZ = True
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
 LOGIN_REDIRECT_URL = 'index'
 
 LOGOUT_REDIRECT_URL = 'login'
+
+# Configure Django App for Heroku.
+django_heroku.settings(locals())
